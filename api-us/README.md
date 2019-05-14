@@ -20,3 +20,7 @@ El cual espera por POST los siguientes parámetros:
 1. Traer la imagen de docker desde docker hub con el comando `docker pull dobloq/apius_web`
 
 2. Levantar el contenedor con el comando `docker run -p 43801:3080 -d apius_web` para que redirija las peticiones al puerto correcto
+
+## Compilar
+
+1. Para volver a compilar la imagen hay que ejecutar el comando `docker build -t apius_web .`
