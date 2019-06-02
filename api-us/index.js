@@ -1,21 +1,24 @@
 const express = require("express");
 const app = express();
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
 // app.post('/scopus', function (req, res) {
-app.get('/scopus', function (req, res) {
+app.post('/scopus', function (req, res) {
   //Cogemos los datos a usar del post
   console.log(req.body)
   let url = "https://api.elsevier.com/content/search/scopus?query="
   let apiKey = "f7f75a8f1e48b03f87da28cc8eb055b7"
-  // let authors = req.body['authors']
-  let authors = ["15021461000","22333640600"]
-  // let startDateProject = req.body['date']
-  let startDateProject = new Date("01-01-2017")
-  // let start = req.body['start']
-  let start = 0
-  // let count = req.body['count']
-  let count = 25
+  let authors = req.body['authors']
+  //let authors = ["15021461000","22333640600"]
+  let startDateProject = req.body['date']
+  startDateProject = new Date(startDateProject)
+  let start = req.body['start']
+  //let start = 0
+  let count = req.body['count']
+  //let count = 25
 
   //Creamos la url
   let finalUrl = url
@@ -33,7 +36,8 @@ app.get('/scopus', function (req, res) {
   xmlHttp.onload = function() { //Cuando se ha cargado la petición entra a este metodo
     if(xmlHttp.readyState == 4 && xmlHttp.status == 200) { //Comprueba que el stado y el status estén bien
       console.log(xmlHttp)
-      res.send(xmlHttp.responseText["search-results"]); //devuelve el resultado
+      console.log(xmlHttp.responseText)
+      res.send(xmlHttp.responseText); //devuelve el resultado
     } else {
       res.status(500).send('Ha habido un error en la petición.')
     }
