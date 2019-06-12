@@ -28,7 +28,7 @@ app.post('/scopus', function (req, res) {
       finalUrl = finalUrl + "%20OR%20"
   });
 
-  finalUrl = finalUrl + "%20AND%20PUBYEAR%20%3E%20" + (startDateProject.getFullYear() - 1) + "%20OR%20PUBYEAR%20%3D%20" + (startDateProject.getFullYear() - 1) + "&apiKey=" + apiKey + "&start=" + start + "&count=" + count
+  finalUrl = finalUrl + "%20AND%20PUBYEAR%20%3E%20" + (startDateProject.getFullYear() - 1) + "%20OR%20PUBYEAR%20%3D%20" + (startDateProject.getFullYear() - 1) + "&view=COMPLETE&apiKey=" + apiKey + "&start=" + start + "&count=" + count
   console.log(finalUrl)
   var xmlHttp = new XMLHttpRequest(); //Declara la variable
   xmlHttp.open("GET",finalUrl); //Abre la conexion con la url y método GET
